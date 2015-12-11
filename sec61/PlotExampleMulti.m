@@ -2,7 +2,7 @@ clear;
 close all;
 clc;
 
-n = 320;
+n = 100;
 m = 2;
 typ = 2; % Choose the relationship Type
 
@@ -36,3 +36,16 @@ set(h, 'Position', [800 850 500 200])
 set(h,'PaperSize',[13 5.4],'PaperPositionMode','auto');
 saveas(h,'ExampleQuadratic','pdf');
 
+h2 = figure;
+
+scatter3(x(1,:),x(2,:),y(1,:),20);
+view([45 15]);
+xlabel('$X_1$','Interpreter','Latex');
+ylabel('$X_2$','Interpreter','Latex');
+zlabel('$Y$','Interpreter','Latex');
+%set(s1,'Position',[.1 .1 .3 .3]);
+zlim([-0.3,1.1]);
+
+set(h2, 'Position', [800 850 270 200])
+set(h2,'PaperSize',[7.5 5.4],'PaperPositionMode','auto');
+saveas(h2,'ExampleQuadratic3d','pdf');
