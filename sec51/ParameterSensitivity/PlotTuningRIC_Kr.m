@@ -11,12 +11,12 @@ load(toLoad);
 h = figure;
 
 hold all;
-plot(ParToTune,powerToPlot');
+plot(ParToTune,powerToPlot','k:');
 plot(ParToTune,mean(powerToPlot),'k','Linewidth',2);
 grid on;
 
 [maxv maxi] = max(mean(powerToPlot));
-line([ParToTune(maxi) ParToTune(maxi)], [0 1]);
+%line([ParToTune(maxi) ParToTune(maxi)], [0 1]);
 xlim([min(ParToTune) max(ParToTune)]);
 xlabel('Parameter ($K_r$)','Interpreter','latex');
 title(['RIC, optimum at $K_r= ' num2str(ParToTune(maxi)) '$'],'Interpreter','latex');

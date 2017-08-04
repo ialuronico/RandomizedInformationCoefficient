@@ -7,7 +7,7 @@ load './saved/testRDC';
 h = figure;
 
 hold all;
-plot(ParToTune,powerToPlot');
+plot(ParToTune,powerToPlot','k:');
 plot(ParToTune,mean(powerToPlot),'k','Linewidth',2);
 grid on;
 

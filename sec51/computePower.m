@@ -60,6 +60,8 @@ valhsic=zeros(ntypes,numnoise,nsim);
 valmi_mean=zeros(ntypes,numnoise,nsim);
 % Total Information Coefficient - TIC_e
 valtice=zeros(ntypes,numnoise,nsim);
+% Total Information Coefficient - MIC_e
+valmice=zeros(ntypes,numnoise,nsim);
 
 % Vectors holding the values of the statistics for the
 % positive class
@@ -80,6 +82,7 @@ valmi_mean2=zeros(ntypes,numnoise,nsim);
 valhsic2=zeros(ntypes,numnoise,nsim);
 valace2=zeros(ntypes,numnoise,nsim);
 valtice2=zeros(ntypes,numnoise,nsim);
+valmice2=zeros(ntypes,numnoise,nsim);
 
 % Loop through different noise levels
 for l =1:numnoise    
@@ -103,9 +106,9 @@ for l =1:numnoise
             
             % Use this function with parameters optimized for 
             % power under Additive noise
-            %[cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe]= computeStatisticsAdditive(x,y);
+            %[cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe,MICe]= computeStatisticsAdditive(x,y);
             % this functions for white noise
-            [cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe]= computeStatisticsWhite(x,y);
+            [cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe,MICe]= computeStatisticsWhite(x,y);
                                   
             Vcor(ii)=cor ;  
             Vdcor(ii)=dCor;   
@@ -122,7 +125,8 @@ for l =1:numnoise
             Vmi_mean(ii)=MI_mean;
             Vhsic(ii)=HSIC;
             Vace(ii)=ACE;
-            Vtice(ii)=TICe;
+            Vtice(ii)=TICe;            
+            Vmice(ii)=MICe;
             
         end % end - nsim
         
@@ -143,6 +147,7 @@ for l =1:numnoise
         valhsic(typ,l,:) = Vhsic;
         valace(typ,l,:) = Vace;        
         valtice(typ,l,:) = Vtice;  
+        valmice(typ,l,:) = Vmice;  
     
         %
         % Positive class
@@ -158,9 +163,9 @@ for l =1:numnoise
                   
             % Use this function with parameters optimized for 
             % power under Additive noise
-            %[cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe]= computeStatisticsAdditive(x,y);
+            %[cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe,MICe]= computeStatisticsAdditive(x,y);
             % this functions for white noise
-            [cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe]= computeStatisticsWhite(x,y);
+            [cor,dCor,MIC,RDC,RIC,MID,MI_k,MI_e,MI_ef,MI_kde,MI_cell,GMIC,MI_mean,HSIC,ACE,TICe,MICe]= computeStatisticsWhite(x,y);
             
             Vric2(ii)=RIC;        
             Vcor2(ii)=cor;          
@@ -178,6 +183,7 @@ for l =1:numnoise
             Vhsic2(ii)=HSIC;
             Vace2(ii)=ACE;
             Vtice2(ii)=TICe;
+            Vmice2(ii)=MICe;
             
         end % end - nsim2
         
@@ -198,6 +204,7 @@ for l =1:numnoise
         valhsic2(typ,l,:) = Vhsic2;
         valace2(typ,l,:) = Vace2;
         valtice2(typ,l,:) = Vtice2;
+        valmice2(typ,l,:) = Vmice2;
         
     end % end - typ
 end % end - numnoise

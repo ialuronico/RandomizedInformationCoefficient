@@ -26,9 +26,9 @@ function [ y,name ] = gen_fun(x,n,noise,l,numnoise,typ)
 
     % Cubic
     if typ==3
-        y=128*(x-1/3).^3-48*(x-1/3).^3-12*(x-1/3)+10* noise  * (l/numnoise) *randn(1,n);
+      y=128*(x-1/3).^3-48*(x-1/3).^3-12*(x-1/3)+10* noise  * (l/numnoise) *randn(1,n);  
     end
-
+    
     % Sinusoidal low frequency
     if typ==4
         y=sin(4*pi*x) + 2*noise * (l/numnoise) *randn(1,n);

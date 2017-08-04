@@ -62,7 +62,10 @@ for tau = 0:taumax
                 c = 5;
                 alpha = 0.65;
                 minestat = mine_e(x_orig(1:end-tau,i)',x_orig(tau+1:end,j)',alpha,c);
-                MeasureMtau(u) = minestat.mic;    
+                MeasureMtau(u) = minestat.tic;                
+            case 'MICe'
+                minestat = mine_e(x_orig(1:end-tau,i)',x_orig(tau+1:end,j)');
+                MeasureMtau(u) = minestat.mic;                  
             case 'MI-KNN'
                 MeasureMtau(u) = MI_Kraskov_mex(x_orig(1:end-tau,i)',x_orig(tau+1:end,j)',6);
             case 'MI-KDE'

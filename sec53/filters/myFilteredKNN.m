@@ -28,7 +28,10 @@ if (strcmp(method,'MIC'))
     rank = myMICFilter(trainData,trainClass,topK);
 end
 if (strcmp(method,'TICe'))
-    rank = myMICFilter(trainData,trainClass,topK);
+    rank = myTICeFilter(trainData,trainClass,topK);
+end
+if (strcmp(method,'MICe'))
+    rank = myMICeFilter(trainData,trainClass,topK);
 end
 if (strcmp(method,'Rho'))
     rank = myRhoFilter(trainData,trainClass,topK);

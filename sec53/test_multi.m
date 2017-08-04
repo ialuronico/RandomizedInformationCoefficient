@@ -4,9 +4,14 @@ clear;clc;
 % Experiments in Section 5.3 about 
 % Feature filtering for regression
 
+%nfolds = 10;
+%times = 3;
+%topFeatures = 10;
+
 nfolds = 10;
 times = 3;
 topFeatures = 10;
+
 
 n = 1;
 newNames{n} = 'bodyfat'; n = n + 1;
@@ -72,6 +77,7 @@ for f=1:length(newNames)
         CV_HSIC(:,nfeature) = kNN_CV(data,C,cplist,salist,nfeature,'HSIC');
         CV_Imean(:,nfeature) = kNN_CV(data,C,cplist,salist,nfeature,'Imean');
         CV_TICe(:,nfeature) = kNN_CV(data,C,cplist,salist,nfeature,'TICe');
+        CV_MICe(:,nfeature) = kNN_CV(data,C,cplist,salist,nfeature,'MICe');
     end
     
     % Save a file for each dataset

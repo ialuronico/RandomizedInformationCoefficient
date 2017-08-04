@@ -21,6 +21,7 @@ nameToPlot{n} = 'QSAR2'; n = n + 1;
 totDS = length(nameToPlot);
 
 totRIC = [];
+totMICe = [];
 totTICe = [];
 totGMIC = [];
 totMID = [];
@@ -39,7 +40,7 @@ totImean = [];
 
 
 %cellTable = cell(length(nameToPlot));
-cellTable = {'$I_{\textup{ew}}$','$I_{\textup{ef}}$','$I_{\textup{A}}$','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$','$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','TIC$_e$','RIC'};
+cellTable = {'$I_{\textup{ew}}$','$I_{\textup{ef}}$','$I_{\textup{A}}$','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$','$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','TIC$_e$','MIC$_e$','RIC'};
 for myF=1:length(nameToPlot)
     name = nameToPlot{myF};    
     load([folder name]);
@@ -241,6 +242,19 @@ for myF=1:length(nameToPlot)
     end
     cellTable{15} = [cellTable{15} ' &' num2str(mu,'%1.3f') '$\pm$' num2str(sigma,'%1.3f') pSt];      
     
+    CV_mea = CV_MICe;
+    mu = mean(mean(CV_mea));
+    sigma = std(mean(CV_mea));
+    [~, p] = ttest(CV_mea(:), CV_RIC(:),'tail','left');  
+    if(p < 0.05)
+        pSt = '$(-)$';
+    elseif (p > 0.95)
+        pSt = '$(+)$';
+    else
+        pSt = '$(=)$';
+    end
+    cellTable{16} = [cellTable{16} ' &' num2str(mu,'%1.3f') '$\pm$' num2str(sigma,'%1.3f') pSt];      
+        
     CV_mea = CV_RIC;
     mu = mean(mean(CV_mea));
     sigma = std(mean(CV_mea));
@@ -252,14 +266,15 @@ for myF=1:length(nameToPlot)
     else
         pSt = '$(=)$';
     end
-    cellTable{16} = [cellTable{16} ' &' num2str(mu,'%1.3f') '$\pm$' num2str(sigma,'%1.3f') ];  
+    cellTable{17} = [cellTable{17} ' &' num2str(mu,'%1.3f') '$\pm$' num2str(sigma,'%1.3f') ];  
         
 
     totImean = [totImean  mean(CV_Imean(:))];
     totHSIC = [totHSIC  mean(CV_HSIC(:))];
     totACE = [totACE  mean(CV_ACE(:))];
     totRIC = [totRIC  mean(CV_RIC(:))];
-    totTICe = [totTICe  mean(CV_TICe(:))];
+    totTICe = [totTICe  mean(CV_TICe(:))];    
+    totMICe = [totMICe  mean(CV_MICe(:))];
     totGMIC = [totGMIC  mean(CV_GMIC(:))];
     totMID = [totMID  mean(CV_MID(:))];
     totRDC = [totRDC  mean(CV_RDC(:))];
@@ -290,7 +305,7 @@ end
 
 % Print histogram
 % Do not include TICe in the analysis
-vars = {'$I_{\textup{ew}}$','$I_{\textup{ef}}$','$I_{\textup{A}}$','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$','$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','RIC'};
+vars = {'$I_{\textup{ew}}$','$I_{\textup{ef}}$','$I_{\textup{A}}$','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$','$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','MIC$_e$','RIC'};
 
 AllVals = [totMI_e(:)';
 totMI_ef(:)';
@@ -307,6 +322,7 @@ totMID(:)';
 totMIC(:)'; 
 totGMIC(:)'; 
 %totTICe(:)'; 
+totMICe(:)'; 
 totRIC(:)'
 ];
 
@@ -323,11 +339,11 @@ hold on;
 
 set(gca,'YGrid','on')  % horizontal grid
 
-xlim([0 16]);
+xlim([0 17]);
 ylim([0 max(D)+0.5]);
 
 set(0, 'defaultTextInterpreter', 'latex');
-%set(gca,'XTick',(1:16));
+set(gca,'XTick',(1:16));
 set(gca,'XTickLabel',Dnames)
 format_ticks(gca,' ');
 ylabel('Average Rank - Correlation Coefficient','Interpreter','latex');

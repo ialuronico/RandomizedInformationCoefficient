@@ -94,19 +94,19 @@ hold on;
 
 set(gca,'YGrid','on')  % horizontal grid
 
-xlim([0 16]);
+xlim([0 17]);
 ylim([min(D)-2 max(D)+0.5]);
 
 set(0, 'defaultTextInterpreter', 'latex');
-%set(gca,'XTick',(1:16));
+set(gca,'XTick',(1:16)); % it has to be 1 less than xlim
 % Substitutes the latex (but it has to be sorted first)
-Dnames = {'RIC','dCorr','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$','HSIC','ACE','$r^2$','GMIC','$I_{\textup{ef}}$','$I_{\textup{A}}$','RDC','$I_{\textup{ew}}$','$I_{\textup{mean}}$','MIC','MID'};
+Dnames = {'RIC','dCorr','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$','HSIC','ACE','MIC$_e$','$r^2$','GMIC','$I_{\textup{ef}}$','$I_{\textup{A}}$','RDC','$I_{\textup{ew}}$','$I_{\textup{mean}}$','MIC','MID'};
 set(gca,'XTickLabel',Dnames);
 format_ticks(gca,' ');
 ylabel('Average Rank - Mean Average Precision','Interpreter','latex');
 
-set(h, 'Position', [800 920 840 290])
-set(h,'PaperSize',[19 7.5],'PaperPositionMode','auto');
+set(h, 'Position', [800 920 880 290])
+set(h,'PaperSize',[20 7.5],'PaperPositionMode','auto');
 saveas(h,'MAPnetworks','pdf');
 
 % Disp latex table

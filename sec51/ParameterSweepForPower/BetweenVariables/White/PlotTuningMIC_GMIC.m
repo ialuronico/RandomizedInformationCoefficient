@@ -9,7 +9,7 @@ load './saved/testMIC_GMIC';
 h = figure;
 
 hold all;
-plot(ParToTune,powerToPlotA');
+plot(ParToTune,powerToPlotA','k:');
 plot(ParToTune,mean(powerToPlotA),'k','Linewidth',2);
 grid on;
 
@@ -29,7 +29,7 @@ saveas(h,'TuneMIC','pdf');
 h = figure;
 
 hold all;
-plot(ParToTune,powerToPlotB');
+plot(ParToTune,powerToPlotB','k:');
 plot(ParToTune,mean(powerToPlotB),'k','Linewidth',2);
 grid on;
 
