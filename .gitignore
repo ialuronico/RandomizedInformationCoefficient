@@ -1,0 +1,9 @@
+# Ignore saved file .mat 
+*.mat
+# But not data sets
+!/DatasetsRegression/*
+!/sec52/networks/*
+# Ignore pdf
+*.pdf
+# Ignore Matlab temporary files
+*~

@@ -3,7 +3,7 @@
 % noise
 % input: x and y random variables
 
-function [cor_,dCor_,MIC_,RDC_,RIC_,MID_,MI_k_, MI_e_, MI_ef_, MI_kde_,MI_cell_,GMIC_,MI_mean_,HSIC_,ACE_,TICe_]= computeStatisticsWhite(x,y)
+function [cor_,dCor_,MIC_,RDC_,RIC_,MID_,MI_k_, MI_e_, MI_ef_, MI_kde_,MI_cell_,GMIC_,MI_mean_,HSIC_,ACE_,TICe_,MICe_]= computeStatisticsWhite(x,y)
 
 RIC_=0;
 cor_=0;
@@ -21,6 +21,7 @@ ACE_ = 0;
 HSIC_ = 0;
 MI_mean_ = 0;
 TICe_ = 0;
+MICe_ = 0;
 
 % It is useful to define n - the number of records
 n = length(x);
@@ -55,6 +56,12 @@ c = 5;
 alpha = 0.8;
 minestat = mine_e(x,y,alpha,c);
 TICe_ = minestat.tic;   
+
+% Maximal Information Coefficient (e-version) - MIC_e
+c = 5;
+alpha = 0.45;
+minestat = mine_e(x,y,alpha,c);
+MICe_ = minestat.mic;   
 
 % Randomized Dependency Coefficient
 k = 20;

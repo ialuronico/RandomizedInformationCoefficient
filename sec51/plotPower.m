@@ -44,6 +44,7 @@ for typ=1:ntypes
         hsic(typ,l)= powerCont(valhsic(typ,l,:),valhsic2(typ, l,:));
         ace(typ,l)= powerCont(valace(typ,l,:),valace2(typ, l,:));
         tice(typ,l)= powerCont(valtice(typ,l,:),valtice2(typ, l,:));
+        mice(typ,l)= powerCont(valmice(typ,l,:),valmice2(typ, l,:));
     end
 end
 
@@ -65,6 +66,7 @@ for typ=1:ntypes
     plot((1:numnoise),mine(typ,:),'rv-','MarkerSize',4);    
     plot((1:numnoise),gmic(typ,:),'<-','Color',[1 .1 1],'MarkerSize',4);  
     plot((1:numnoise),tice(typ,:),'s-','Color',[.6 .1 .6],'MarkerSize',4);  
+    plot((1:numnoise),mice(typ,:),'rs-','MarkerSize',4);   
     plot((1:numnoise),ric(typ,:),'k-','LineWidth',2)    
 
     grid on;
@@ -81,12 +83,12 @@ for typ=1:ntypes
 end
 
 vars = {'$I_{\textup{ew}}$','$I_{\textup{ef}}$','$I_{\textup{A}}$','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$',...
-        '$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','TIC$_e$',...        
+        '$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','TIC$_e$','MIC$_e$',...        
         'RIC'};
 leg = legend(vars);
-set(leg,'Position',[0.5 -0.07 .01 .2],'Interpreter','latex','Orientation','Horizontal');
+set(leg,'Position',[0.49 -0.07 .02 .18],'Interpreter','latex','Orientation','Horizontal');
 set(h, 'Position', [600 650 1770 920])
-set(h,'PaperSize',[40 24],'PaperPositionMode','auto');
+set(h,'PaperSize',[35 19],'PaperPositionMode','auto');
 saveas(h,'resultsPower.pdf');
 
 % Average results across relationships
@@ -109,6 +111,7 @@ plot((1:numnoise),mean(mid),'>--','Color',[1 .5 0],'MarkerSize',4);
 plot((1:numnoise),mean(mine),'rv-','MarkerSize',4); 
 plot((1:numnoise),mean(gmic),'<-','Color',[1 .1 1],'MarkerSize',4);     
 plot((1:numnoise),mean(tice),'s-','Color',[.6 .1 .6],'MarkerSize',4);  
+plot((1:numnoise),mean(mice),'rs-','MarkerSize',2);  
 plot((1:numnoise),mean(ric),'k-','LineWidth',2);    
 ylabel('Power','Interpreter','latex');
 xlabel('Noise Lev.','Interpreter','latex');
@@ -137,6 +140,7 @@ mean(mid,2),...
 mean(mine,2),...
 mean(gmic,2),...
 mean(tice,2),...
+mean(mice,2),...
 mean(ric,2)
 ]; 
 
@@ -145,7 +149,7 @@ D = stats.meanranks;
 
 [D, indD] = sort(D,'ascend');
 Dnames = {'$I_{\textup{ew}}$','$I_{\textup{ef}}$','$I_{\textup{A}}$','$I_{\textup{KDE}}$','$I_{\textup{kNN}}$',...
-        '$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','TIC$_e$',...        
+        '$I_{\textup{mean}}$','$r^2$','dCorr','RDC','ACE','HSIC','MID','MIC','GMIC','TIC$_e$','MIC$_e$',...        
         'RIC'};
 Dnames = Dnames(indD);
 
@@ -155,11 +159,11 @@ b=bar(1:length(Dnames),D,'w');
 hold on;
 
 set(gca,'YGrid','on')  % horizontal grid
-xlim([0 17]); 
+xlim([0 18]); 
 ylim([0 max(D)+0.5]);
 
 set(0,'DefaultTextInterpreter', 'latex');
-set(gca,'XTick',(1:16));
+set(gca,'XTick',(1:17));
 set(gca,'XTickLabel',Dnames);
 format_ticks(gca,' ');
 ylabel('Average Rank - Power','Interpreter','latex');
