@@ -1,0 +1,5 @@
+# Ignore data sets .mat and generated plots .pdf
+*.pdf
+*.mat
+# Ignore Matlab temporary files
+*~
