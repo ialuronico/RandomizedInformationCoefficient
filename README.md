@@ -17,8 +17,8 @@ RIC source code as well as other statistic code can also be found under the fold
 The code is supposed to run in **Matlab** and it was tested on a 64bit Linux system. Some statistics are implemented either in C or C++, thus their code might be re-compiled if another system is used. We provide the script `compile_X_matlab.m` to compile measures implemented in C or C++. Those are:
 
 * The Randomized Information Coefficient (RIC) - `compile_RIC_matlab.m`;
-* RIC with **random fern discretization* - `compile_RICrndFerns_matlab.m`;
-* RIC with **random seeds discretization* requires to compile the procedure `computeNMI` - `compile_computeNMI_matlab.m`;
+* RIC with **random fern discretization** - `compile_RICrndFerns_matlab.m`;
+* RIC with **random seeds discretization** requires to compile the procedure `computeNMI` - `compile_computeNMI_matlab.m`;
 * The Maximal Information Coefficient (MIC) - `compile_MINE_matlab.m`;
 * The Maximal Information Coefficient (e) (MICe) - `compile_MINE_e_matlab.m`;
 * The Generalized Mean Information Coefficient (GMIC) - `compile_MINE_matlab.m`;
